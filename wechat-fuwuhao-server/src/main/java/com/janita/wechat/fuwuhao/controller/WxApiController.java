@@ -1,5 +1,7 @@
 package com.janita.wechat.fuwuhao.controller;
 
+import com.janita.wechat.common.result.ResultDto;
+import me.chanjar.weixin.mp.api.WxMpConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
@@ -23,7 +25,10 @@ public class WxApiController {
     private final static Logger logger = LoggerFactory.getLogger(WxApiController.class);
 
     @Autowired
-    private WxMpInMemoryConfigStorage wxMpInMemoryConfigStorage;
+    private WxMpConfigStorage wxMpConfigStorage;
+
+    @Autowired
+    private WxMpService wxMpService;
 
     /**
      * 验证微信token
@@ -40,14 +45,11 @@ public class WxApiController {
         String nonce = request.getParameter("nonce");
         String echostr = request.getParameter("echostr");
 
-        //微信工具类
-        WxMpService wxService = new WxMpServiceImpl();
-
         //注入token值,这个token的值必须是微信后台的token
-        wxService.setWxMpConfigStorage(wxMpInMemoryConfigStorage);
+        wxMpService.setWxMpConfigStorage(wxMpConfigStorage);
 
         //检测签名
-        boolean flag=wxService.checkSignature(timestamp, nonce, signature);
+        boolean flag = wxMpService.checkSignature(timestamp, nonce, signature);
         if (flag) {
             return echostr;
         }else {
@@ -55,15 +57,4 @@ public class WxApiController {
             return null;
         }
     }
-
-//    public ResultDto auth() {
-//        WxMpService wxMpService = new WxMpServiceImpl();
-//        String url = "";
-//        try {
-//            wxMpService.getAccessToken();
-//        } catch (WxErrorException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
 }
