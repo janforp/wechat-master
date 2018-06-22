@@ -34,11 +34,6 @@ public class PageController {
     @Autowired
     private WxMpService wxMpService;
 
-    @GetMapping("/index.html")
-    public String index(){
-        return "index";
-    }
-
     @GetMapping("/auth")
     public void auth(HttpServletResponse response) {
         String authCallBackUrl = baseUrl + "wx/authCallBack";

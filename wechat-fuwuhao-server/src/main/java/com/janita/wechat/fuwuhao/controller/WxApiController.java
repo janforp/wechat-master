@@ -3,7 +3,6 @@ package com.janita.wechat.fuwuhao.controller;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.slf4j.Logger;
@@ -12,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created on 2018/6/21
@@ -67,25 +64,27 @@ public class WxApiController {
 
     /**
      * 发送模板消息
+     * 测试
      * @return
      */
     @GetMapping("/sendMsgTemplate")
-    public void sendMsgTemplate(WxMpXmlMessage message, HttpServletResponse response, HttpServletRequest request) {
+    public void sendMsgTemplate(HttpServletRequest request) {
         WxMpTemplateMessage orderPaySuccessTemplate = WxMpTemplateMessage.builder().build();
-        orderPaySuccessTemplate.setToUser("oXfZo1NG9c0nL9OlNC1EMuUjcN9M");
-        orderPaySuccessTemplate.setTemplateId("dVdfU_VjU1uOdBT4oGDDsYKhy1hQQJYjvbvaI5MZxiU");
+        orderPaySuccessTemplate.setToUser("oXfZo1O4yOUQc8qH3swIXDbYd6eo");
+        orderPaySuccessTemplate.setTemplateId("4GidKchBtVIjXmqsGf4afR-aXIhHmzH7TVwJRFX2Qc8");
         orderPaySuccessTemplate.setUrl("http://www.baidu.com");
         WxMpTemplateData firstData = new WxMpTemplateData("first", "订单支付成功", TEMPLATE_FRONT_COLOR);
-        WxMpTemplateData orderMoneySumData = new WxMpTemplateData("orderMoneySum", request.getParameter("orderMoneySum"), TEMPLATE_FRONT_COLOR);
-        WxMpTemplateData orderProductNameData = new WxMpTemplateData("orderProductName", request.getParameter("orderProductName"), TEMPLATE_FRONT_COLOR);
-        WxMpTemplateData remarkData = new WxMpTemplateData("Remark", request.getParameter("remark"), TEMPLATE_FRONT_COLOR);
+        WxMpTemplateData orderMoneySumData = new WxMpTemplateData("keyword1", "恒生电子", TEMPLATE_FRONT_COLOR);
+        WxMpTemplateData orderProductNameData = new WxMpTemplateData("keyword2", "6558984", TEMPLATE_FRONT_COLOR);
+        WxMpTemplateData price = new WxMpTemplateData("keyword3", "188.9", TEMPLATE_FRONT_COLOR);
+        WxMpTemplateData remarkData = new WxMpTemplateData("remark", "触发了T信号触发了T信号触发了T信号", TEMPLATE_FRONT_COLOR);
         orderPaySuccessTemplate.addData(firstData)
                 .addData(orderMoneySumData)
                 .addData(orderProductNameData)
+                .addData(price)
                 .addData(remarkData);
         try {
-            wxMpService.getTemplateMsgService()
-                    .sendTemplateMsg(orderPaySuccessTemplate);
+            wxMpService.getTemplateMsgService().sendTemplateMsg(orderPaySuccessTemplate);
         } catch (WxErrorException e) {
             logger.error(e.getMessage());
         }
