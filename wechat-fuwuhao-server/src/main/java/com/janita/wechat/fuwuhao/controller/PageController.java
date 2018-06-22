@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Random;
 import java.util.UUID;
 
@@ -39,12 +41,17 @@ public class PageController {
     }
 
     @GetMapping("/auth")
-    public String auth() {
+    public void auth(HttpServletResponse response) {
         String authCallBackUrl = baseUrl + "wx/authCallBack";
         String state = UUID.randomUUID().toString().replace("-","");
+
         //scope = snsapi_base 的授权用户是无感知的
         String url = wxMpService.oauth2buildAuthorizationUrl(authCallBackUrl, WxConsts.OAuth2Scope.SNSAPI_BASE, state);
-        return "redirect:" + url;
+        try {
+            response.sendRedirect(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -61,6 +68,7 @@ public class PageController {
             String openId = auth2AccessToken.getOpenId();
             request.setAttribute("openId", openId);
         } catch (WxErrorException e) {
+            logger.error("获取用户 openId 失败");
             e.printStackTrace();
         }
         return "bind";
