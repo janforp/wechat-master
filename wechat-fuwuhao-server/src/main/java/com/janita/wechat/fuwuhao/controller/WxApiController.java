@@ -1,10 +1,10 @@
 package com.janita.wechat.fuwuhao.controller;
 
 import com.janita.wechat.common.result.ResultDto;
-import me.chanjar.weixin.mp.api.WxMpConfigStorage;
+import com.janita.wechat.common.result.ResultDtoFactory;
+import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class WxApiController {
     private final static Logger logger = LoggerFactory.getLogger(WxApiController.class);
 
     @Autowired
-    private WxMpConfigStorage wxMpConfigStorage;
+    private WxMpInMemoryConfigStorage wxMpConfigStorage;
 
     @Autowired
     private WxMpService wxMpService;

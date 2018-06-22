@@ -35,7 +35,7 @@ public class WxConfig {
      * @return
      */
     @Bean
-    public WxMpConfigStorage wxMpConfigStorage() {
+    public WxMpInMemoryConfigStorage wxMpConfigStorage() {
         WxMpInMemoryConfigStorage wxConfigProvider=new WxMpInMemoryConfigStorage();
         wxConfigProvider.setAppId(appId);
         wxConfigProvider.setSecret(appSecret);

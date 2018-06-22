@@ -22,7 +22,7 @@ public class PageController {
      * 去绑定页面
      * @return
      */
-    @GetMapping("/bind")
+    @GetMapping("/bind.html")
     public String bind(){
         return "bind";
     }
