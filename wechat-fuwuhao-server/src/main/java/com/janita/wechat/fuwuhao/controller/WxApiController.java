@@ -1,17 +1,20 @@
 package com.janita.wechat.fuwuhao.controller;
 
-import com.janita.wechat.common.result.ResultDto;
+import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created on 2018/6/21
@@ -28,6 +31,11 @@ public class WxApiController {
 
     @Autowired
     private WxMpService wxMpService;
+
+    /**
+     * 模板消息字体颜色
+     */
+    private static final String TEMPLATE_FRONT_COLOR = "red";
 
     /**
      * 验证微信token
@@ -61,8 +69,25 @@ public class WxApiController {
      * 发送模板消息
      * @return
      */
-    @PostMapping("/sendMsgTemplate")
-    public ResultDto sendMsgTemplate() {
-        return null;
+    @GetMapping("/sendMsgTemplate")
+    public void sendMsgTemplate(WxMpXmlMessage message, HttpServletResponse response, HttpServletRequest request) {
+        WxMpTemplateMessage orderPaySuccessTemplate = WxMpTemplateMessage.builder().build();
+        orderPaySuccessTemplate.setToUser("oXfZo1NG9c0nL9OlNC1EMuUjcN9M");
+        orderPaySuccessTemplate.setTemplateId("dVdfU_VjU1uOdBT4oGDDsYKhy1hQQJYjvbvaI5MZxiU");
+        orderPaySuccessTemplate.setUrl("http://www.baidu.com");
+        WxMpTemplateData firstData = new WxMpTemplateData("first", "订单支付成功", TEMPLATE_FRONT_COLOR);
+        WxMpTemplateData orderMoneySumData = new WxMpTemplateData("orderMoneySum", request.getParameter("orderMoneySum"), TEMPLATE_FRONT_COLOR);
+        WxMpTemplateData orderProductNameData = new WxMpTemplateData("orderProductName", request.getParameter("orderProductName"), TEMPLATE_FRONT_COLOR);
+        WxMpTemplateData remarkData = new WxMpTemplateData("Remark", request.getParameter("remark"), TEMPLATE_FRONT_COLOR);
+        orderPaySuccessTemplate.addData(firstData)
+                .addData(orderMoneySumData)
+                .addData(orderProductNameData)
+                .addData(remarkData);
+        try {
+            wxMpService.getTemplateMsgService()
+                    .sendTemplateMsg(orderPaySuccessTemplate);
+        } catch (WxErrorException e) {
+            logger.error(e.getMessage());
+        }
     }
 }
