@@ -114,16 +114,25 @@
                 <version>3.17</version>
             </dependency>
 
+            <!--aop日志-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
                 <version>1.5.3.RELEASE</version>
             </dependency>
 
+            <!--微信开发感觉-->
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-mp</artifactId>
                 <version>3.0.0</version>
+            </dependency>
+
+            <!--freemarker 模板引擎-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+                <version>2.0.1.RELEASE</version>
             </dependency>
 
         </dependencies>

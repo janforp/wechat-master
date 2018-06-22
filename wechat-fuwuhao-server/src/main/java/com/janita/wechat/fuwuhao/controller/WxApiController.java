@@ -1,6 +1,5 @@
 package com.janita.wechat.fuwuhao.controller;
 
-import com.janita.wechat.fuwuhao.config.WeChatConfig;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
@@ -19,12 +18,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/wxApi")
-public class IndexController {
+public class WxApiController {
 
-    private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
+    private final static Logger logger = LoggerFactory.getLogger(WxApiController.class);
 
     @Autowired
-    private WeChatConfig weChatConfig;
+    private WxMpInMemoryConfigStorage wxMpInMemoryConfigStorage;
 
     /**
      * 验证微信token
@@ -42,14 +41,10 @@ public class IndexController {
         String echostr = request.getParameter("echostr");
 
         //微信工具类
-        WxMpService wxService=new WxMpServiceImpl();
-
-        //注入token的配置参数，生产环境 建议将WxMpInMemoryConfigStorage持久化
-        WxMpInMemoryConfigStorage wxConfigProvider=new WxMpInMemoryConfigStorage();
+        WxMpService wxService = new WxMpServiceImpl();
 
         //注入token值,这个token的值必须是微信后台的token
-        wxConfigProvider.setToken(weChatConfig.getWxToken());
-        wxService.setWxMpConfigStorage(wxConfigProvider);
+        wxService.setWxMpConfigStorage(wxMpInMemoryConfigStorage);
 
         //检测签名
         boolean flag=wxService.checkSignature(timestamp, nonce, signature);
@@ -60,4 +55,15 @@ public class IndexController {
             return null;
         }
     }
+
+//    public ResultDto auth() {
+//        WxMpService wxMpService = new WxMpServiceImpl();
+//        String url = "";
+//        try {
+//            wxMpService.getAccessToken();
+//        } catch (WxErrorException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 }

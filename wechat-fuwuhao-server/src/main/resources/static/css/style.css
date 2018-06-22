@@ -1,0 +1,230 @@
+html {
+	height: 100%;
+}
+
+#uploadUl li {
+    border:1px dashed #979797;
+}
+.swiper-slide img {
+    max-height: 500px;
+}
+
+.am-flex-cell {
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+}
+.message-cell{
+	padding: 15px 13px 20px 60px;
+	position: relative;
+}
+.b-border:after{
+	content: " ";
+	width: 100%;
+	height: 1px;
+	transform: scaleY(0.5);
+	-webkit-transform: scaleY(0.5);
+	-moz-transform: scaleY(0.5);
+	-ms-transform: scaleY(0.5);
+	background-color:#CDCDCD;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+.name-cell{
+   width:150px;
+   overflow:hidden;
+   text-overflow:ellipsis;
+   -o-text-overflow:ellipsis;
+   -webkit-text-overflow:ellipsis;
+   -moz-text-overflow:ellipsis;
+    white-space:nowrap;
+    position:relative;
+    color: #586C96;
+    font-size: 14px;
+    font-weight: bold;
+}
+.icon-great{
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	position: relative;
+	top: 1px;
+	background: url(../images/icon-great.png) no-repeat;
+	background-size: 14px 14px;
+}
+.icon-great.active{
+	background: url(../images/icon-great-active.png) no-repeat;
+	background-size: 14px 14px;
+}
+.ft-gary{
+	color: #8E8E8E;
+	font-size: 10px;
+}
+.ft-message{
+	font-size: 14px;
+	color: #333;
+	padding-right: 30px;
+	margin-top: 5px;
+}
+.photo-item li{
+	width: 75px;
+	margin-right: 5px;
+	margin-top: 10px;
+}
+.head-cell{
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	left: 10px;
+	top: 15px;
+}
+footer{
+	width: 100%;
+}
+.write-cell{
+	width: 100%;
+	height: 45px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background-color: #f3f4f4;
+	padding: 6px 20px;
+}
+.input-text{
+	width: 100%;
+	border:1px solid #dadadd;
+	outline: none;
+	appearance: none;
+	-webkit-appearance: none;
+	height: 35px;
+	padding-left: 40px;
+	border-radius: 20px;
+}
+.icon-share{
+	display: block;
+	width: 19px;
+	height: 19px;
+	background: url(../images/icon-share.png) no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+    top: 8px;
+    margin-left:15px ;
+}
+.icon-write{
+	display: block;
+	width: 19px;
+	height: 19px;
+	background: url(../images/icon-write.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+    top: 8px;
+    left:15px ;
+}
+.mask {
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.6);
+}
+.dialog-item{
+	width: 100%;
+	background-color: #F6F6F8;
+	padding: 10px 15px 25px 15px;
+	position:fixed;
+	left: 0;
+	bottom: 0;
+	z-index: 9999;
+}
+.ft-black{
+	color: #333;
+	font-weight: bold;
+}
+.default{
+	color: #D0D0D0;
+}
+.default.active{
+	color: #333;
+	font-weight: bold;
+}
+textarea{
+	appearance: none;
+	-webkit-appearance: none;
+	resize:none;
+	outline: none;
+	padding: 10px;
+	margin: 10px 0 0 0;
+	font-size: 14px;
+	color: #333;
+	border:1px solid #dadadd;
+}
+.add-btn{
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 100px;
+    background-color: #fff;
+    background-image: url(../images/icon-add.png) ;
+    background-repeat: no-repeat;
+    background-size: 45px 45px;
+    background-position: center center;
+    border:1px dashed #979797;
+}
+.dialog li{
+	position: relative;
+	width: 85px;
+}
+.dialog li:last-child{
+	height: 85px;
+}
+.icon-close{
+	display: block;
+	width: 20px;
+	height: 20px;
+	background-color:rgba(0,0,0,0.40);
+	border-radius: 0 0 0 5px;
+	background-image: url(../images/icon-close.png);
+	background-size: 14px 14px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.img-cell {
+    width:90%;
+	position:fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform:translate(-50%,-50%) ;
+	-moz-transform:translate(-50%,-50%) ;
+	z-index: 99999;
+    display: flex;
+    justify-content: center;
+}
+#preview {
+    width:100%;
+    height: 60%;
+    /*max-height: 60%;*/
+}
+.pop-close{
+	display: block;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	right: 0;
+	top: -40px;
+	background: url(../images/pop-close.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.hide{
+    display: none;
+}
