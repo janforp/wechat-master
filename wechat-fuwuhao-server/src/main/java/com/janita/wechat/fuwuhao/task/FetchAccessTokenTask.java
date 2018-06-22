@@ -31,12 +31,14 @@ public class FetchAccessTokenTask {
     /**
      * 每 7000s 需要更新一次 accessToken
      */
-    @Scheduled(fixedRate = 1000 * 30)
+    @Scheduled(fixedRate = 1000 * 7000)
     public void fetchAccessToken() {
         try {
             logger.info("更新之前的 accessToken : " + configStorage.getAccessToken());
             logger.info("更新 accessToken 开始时间 ：" + DateTimeUtils.timestampToDate(new Timestamp(System.currentTimeMillis())));
-            String accessToken = wxMpService.getAccessToken();
+
+            //需要强制更新
+            String accessToken = wxMpService.getAccessToken(true);
             configStorage.setAccessToken(accessToken);
             logger.info("更新之后的 accessToken : " + accessToken);
         } catch (WxErrorException e) {
