@@ -1,0 +1,20 @@
+1.登录测试号申请地址：
+https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index
+图1
+
+
+
+2.本地搭建服务器：
+服务端口不做限制(网上说的要求80端口是扯淡)
+本示例端口:8888
+使用 ngrok 网络穿透到外网
+图2
+
+3.测试公众号 接口配置信息修改
+需要 url 及 token
+在配置的时候微信需要通过 url 访问到服务,并且服务能服务正确的 token
+token及url见图3
+后台接口见图4
+注意:使用ngrok配置url的时候不要使用https
+还有一些原因导致配置失败 TODO
+
