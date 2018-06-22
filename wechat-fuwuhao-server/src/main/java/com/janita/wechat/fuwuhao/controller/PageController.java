@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -50,6 +49,7 @@ public class PageController {
         try {
             response.sendRedirect(url);
         } catch (IOException e) {
+            logger.error("用户授权重定向失败");
             e.printStackTrace();
         }
     }
