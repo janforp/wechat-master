@@ -1,11 +1,13 @@
 package com.janita.wechat.fuwuhao.controller;
 
+import com.janita.wechat.common.result.ResultDto;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,5 +55,14 @@ public class WxApiController {
             logger.error("签名错误");
             return null;
         }
+    }
+
+    /**
+     * 发送模板消息
+     * @return
+     */
+    @PostMapping("/sendMsgTemplate")
+    public ResultDto sendMsgTemplate() {
+        return null;
     }
 }
