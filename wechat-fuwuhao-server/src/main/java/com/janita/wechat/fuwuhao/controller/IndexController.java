@@ -41,8 +41,8 @@ public class IndexController {
 
         //注入token的配置参数，生产环境 建议将WxMpInMemoryConfigStorage持久化
         WxMpInMemoryConfigStorage wxConfigProvider=new WxMpInMemoryConfigStorage();
-        //注入token值
-        wxConfigProvider.setToken("weixin");
+        //注入token值,这个token的值必须是微信后台的token
+        wxConfigProvider.setToken("token");
         wxService.setWxMpConfigStorage(wxConfigProvider);
 
         boolean flag=wxService.checkSignature(timestamp, nonce, signature);
