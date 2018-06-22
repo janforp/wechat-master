@@ -1,4 +1,4 @@
-package utils;
+package com.janita.wechat.common.utils;
 
 
 import java.sql.Timestamp;
