@@ -32,8 +32,9 @@ public class WxApiController {
 
     /**
      * 模板消息字体颜色
+     * 32CD32
      */
-    private static final String TEMPLATE_FRONT_COLOR = "#32CD32";
+    private static final String TEMPLATE_FRONT_COLOR = "black";
 
     /**
      * 逗号
@@ -80,9 +81,9 @@ public class WxApiController {
         orderPaySuccessTemplate.setToUser("oXfZo1NG9c0nL9OlNC1EMuUjcN9M");
         orderPaySuccessTemplate.setTemplateId("c9qIzbCmDllYS-35IuM9ebWzZ9CxIDaXa_NcvbhBDv0");
         orderPaySuccessTemplate.setUrl("http://www.baidu.com");
-        WxMpTemplateData firstData = new WxMpTemplateData("a", "订单支付成功", TEMPLATE_FRONT_COLOR);
-        WxMpTemplateData orderMoneySumData = new WxMpTemplateData("b", "恒生电子", TEMPLATE_FRONT_COLOR);
-        WxMpTemplateData orderProductNameData = new WxMpTemplateData("c", "6558984", TEMPLATE_FRONT_COLOR);
+        WxMpTemplateData firstData = new WxMpTemplateData("a", "订单号码：12323445559984", TEMPLATE_FRONT_COLOR);
+        WxMpTemplateData orderMoneySumData = new WxMpTemplateData("b", "股票名称：恒生电子", TEMPLATE_FRONT_COLOR);
+        WxMpTemplateData orderProductNameData = new WxMpTemplateData("c", "股票代码：6558984", TEMPLATE_FRONT_COLOR);
         WxMpTemplateData price = new WxMpTemplateData("keyword3", "188.9", TEMPLATE_FRONT_COLOR);
         WxMpTemplateData remarkData = new WxMpTemplateData("remark", "触发了T信号触发了T信号触发了T信号", TEMPLATE_FRONT_COLOR);
         orderPaySuccessTemplate.addData(firstData)
