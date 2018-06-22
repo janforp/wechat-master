@@ -34,9 +34,9 @@ public class PageController {
     @Autowired
     private WxMpService wxMpService;
 
-    @GetMapping("/auth")
+    @GetMapping("/bind")
     public void auth(HttpServletResponse response) {
-        String authCallBackUrl = baseUrl + "wx/authCallBack";
+        String authCallBackUrl = baseUrl + "wx/bindCallBack";
         String state = UUID.randomUUID().toString().replace("-","");
 
         //scope = snsapi_base 的授权用户是无感知的
@@ -55,7 +55,7 @@ public class PageController {
      * @param request
      * @return
      */
-    @GetMapping("/authCallBack")
+    @GetMapping("/bindCallBack")
     public String authCallBack(HttpServletRequest request) {
         String code = request.getParameter("code");
         try {
