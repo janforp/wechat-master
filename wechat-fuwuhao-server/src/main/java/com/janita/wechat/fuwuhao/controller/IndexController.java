@@ -1,10 +1,12 @@
 package com.janita.wechat.fuwuhao.controller;
 
+import com.janita.wechat.fuwuhao.config.WeChatConfig;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 public class IndexController {
 
     private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
+
+    @Autowired
+    private WeChatConfig weChatConfig;
 
     /**
      * 验证微信token
@@ -41,14 +46,15 @@ public class IndexController {
 
         //注入token的配置参数，生产环境 建议将WxMpInMemoryConfigStorage持久化
         WxMpInMemoryConfigStorage wxConfigProvider=new WxMpInMemoryConfigStorage();
+
         //注入token值,这个token的值必须是微信后台的token
-        wxConfigProvider.setToken("token");
+        wxConfigProvider.setToken(weChatConfig.getWxToken());
         wxService.setWxMpConfigStorage(wxConfigProvider);
 
+        //检测签名
         boolean flag=wxService.checkSignature(timestamp, nonce, signature);
         if (flag) {
             return echostr;
-
         }else {
             logger.error("签名错误");
             return null;
