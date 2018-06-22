@@ -42,6 +42,8 @@ public class FetchAccessTokenTask {
             configStorage.setAccessToken(accessToken);
             logger.info("更新之后的 accessToken : " + accessToken);
         } catch (WxErrorException e) {
+            logger.error("定时更新 accessToken 任务失败");
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
     }

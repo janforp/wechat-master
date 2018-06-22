@@ -1,8 +1,5 @@
 package com.janita.wechat.fuwuhao.controller;
 
-import com.janita.wechat.common.result.ResultDto;
-import com.janita.wechat.common.result.ResultDtoFactory;
-import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
 import org.slf4j.Logger;
