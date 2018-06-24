@@ -1,29 +1,26 @@
 package com.janita.wechat.fuwuhao.controller;
 
 import me.chanjar.weixin.common.exception.WxErrorException;
-import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created on 2018/6/21
+ * Created on 2018/6/24
  * @author Janita
+ * 发送模板消息接口
  */
 @RestController
-@RequestMapping("/wxApi")
-public class WxApiController {
-
-    private final static Logger logger = LoggerFactory.getLogger(WxApiController.class);
-
-    @Autowired
-    private WxMpInMemoryConfigStorage wxMpConfigStorage;
+@RequestMapping("/msg")
+public class TemplateMsgController {
 
     @Autowired
     private WxMpService wxMpService;
@@ -39,8 +36,7 @@ public class WxApiController {
      */
     private static final String COMMA = ",";
 
-
-
+    private final static Logger logger = LoggerFactory.getLogger(TemplateMsgController.class);
 
     /**
      * 发送模板消息
@@ -67,17 +63,6 @@ public class WxApiController {
             wxMpService.getTemplateMsgService().sendTemplateMsg(orderPaySuccessTemplate);
         } catch (WxErrorException e) {
             logger.error(e.getMessage());
-        }
-    }
-
-    @PostMapping("/batchSendMsgTemplate")
-    public void sendMsgTemplate(@RequestParam("wxOpenIds") String wxOpenIds) {
-        if (StringUtils.isEmpty(wxOpenIds)) {
-            return;
-        }
-        String[] arr = wxOpenIds.split(COMMA);
-        for (String wxOpenId : arr) {
-
         }
     }
 }

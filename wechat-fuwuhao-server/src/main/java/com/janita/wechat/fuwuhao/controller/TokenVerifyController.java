@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/token")
-public class WxTokenController {
+public class TokenVerifyController {
 
     @Autowired
     private WxMpService wxMpService;
@@ -27,7 +27,7 @@ public class WxTokenController {
     @Autowired
     private WxMpInMemoryConfigStorage wxMpConfigStorage;
 
-    private final static Logger logger = LoggerFactory.getLogger(WxTokenController.class);
+    private final static Logger logger = LoggerFactory.getLogger(TokenVerifyController.class);
 
     /**
      * 验证微信token
