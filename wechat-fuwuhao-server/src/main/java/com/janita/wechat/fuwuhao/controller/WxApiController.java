@@ -10,9 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * Created on 2018/6/21
@@ -42,33 +40,7 @@ public class WxApiController {
     private static final String COMMA = ",";
 
 
-    /**
-     * 验证微信token
-     * 该接口用于与微信服务器交互
-     * @param request
-     * @return
-     */
-    @GetMapping("/verifyToken")
-    public String verifyToken(HttpServletRequest request) {
 
-        //微信服务器get传递的参数
-        String signature = request.getParameter("signature");
-        String timestamp = request.getParameter("timestamp");
-        String nonce = request.getParameter("nonce");
-        String echostr = request.getParameter("echostr");
-
-        //注入token值,这个token的值必须是微信后台的token
-        wxMpService.setWxMpConfigStorage(wxMpConfigStorage);
-
-        //检测签名
-        boolean flag = wxMpService.checkSignature(timestamp, nonce, signature);
-        if (flag) {
-            return echostr;
-        }else {
-            logger.error("签名错误");
-            return null;
-        }
-    }
 
     /**
      * 发送模板消息
