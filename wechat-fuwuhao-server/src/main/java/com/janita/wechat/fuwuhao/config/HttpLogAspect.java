@@ -1,4 +1,4 @@
-package com.janita.wechat.fuwuhao.log;
+package com.janita.wechat.fuwuhao.config;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -16,12 +16,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Aspect
 @Component
-public class HttpAspect {
+public class HttpLogAspect {
 
     /**
      * spring自带的
      */
-    private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
+    private final static Logger logger = LoggerFactory.getLogger(HttpLogAspect.class);
 
     /**
      * 指定切点

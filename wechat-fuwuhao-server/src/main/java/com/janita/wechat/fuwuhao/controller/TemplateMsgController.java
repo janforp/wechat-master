@@ -75,9 +75,10 @@ public class TemplateMsgController {
             return;
         }
         if (StringUtils.isEmpty(stockName) && StringUtils.isEmpty(triggerCondition) &&
-                StringUtils.isEmpty(triggerPrice) && StringUtils.isEmpty(strategyNo) &&
-                StringUtils.isEmpty(kLineType) && StringUtils.isEmpty(maiDanAmount) &&
-                StringUtils.isEmpty(weiTuoMethod) && StringUtils.isEmpty(failReason) && StringUtils.isEmpty(reboundAmplitude)) {
+            StringUtils.isEmpty(triggerPrice) && StringUtils.isEmpty(strategyNo) &&
+            StringUtils.isEmpty(kLineType) && StringUtils.isEmpty(maiDanAmount) &&
+            StringUtils.isEmpty(weiTuoMethod) && StringUtils.isEmpty(failReason) &&
+            StringUtils.isEmpty(reboundAmplitude)) {
             return;
         }
 
