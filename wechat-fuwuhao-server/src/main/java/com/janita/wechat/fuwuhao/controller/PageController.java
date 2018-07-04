@@ -68,4 +68,9 @@ public class PageController {
         }
         return "bind";
     }
+
+    @GetMapping("/test")
+    public String test(){
+        return "test";
+    }
 }
