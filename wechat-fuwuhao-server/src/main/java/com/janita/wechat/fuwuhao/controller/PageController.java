@@ -73,4 +73,9 @@ public class PageController {
     public String test(){
         return "test";
     }
+
+    @GetMapping("/bindPage")
+    public String bindPage() {
+        return "bind";
+    }
 }

@@ -1,21 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>账号绑定</title>
-    <!--微信 JSSDK-->
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-    <script type="text/javascript" src="/js/common/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="/js/common/util.js"></script>
-</head>
-<body>
-    <div>
-        <input placeholder="请输入手机号">
-        <input placeholder="验证码">
-    </div>
-</body>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>来牛账户绑定</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="format-detection" content="email=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+		<link rel="stylesheet" href="/css/style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="input-tel-item am-flex">
+				<div class="tel-head">+86</div>
+				<div class="flex_01">
+					<input type="tel" name="tel" placeholder="请输入手机号" class="input-tel"/>
+				</div>				
+			</div>
+			<div class="am-flex am-mt-10">
+				<div class="input-tel-item">
+					<input type="number" name="code" placeholder="请输入验证码" class="input-tel"/>
+				</div>
+				<div class="code-item" id="btnVcode">发送验证码</div>
+			</div>
+			<p class="am-mt-10  error-tips">*验证码输入错误</p>
+			<a href="#" class="toggle-button">确定绑定</a>			
+			<p class="am-mt-10 gray-ft">（绑定成功后即可通过微信获取最新提醒消息）</p>			
+		</div>
+		<div class="dialog" style="display: none;">
+			<div class="mask"></div>
+			<div class="dialog-block">
+				<div class="dialog-content">
+					<p class="ft-black am-ft-18">绑定成功</p>
+				</div>
+				<a href="#" class="pop-btn am-ft-18 t-line">确定</a>
+			</div>
+		</div>
+		<div class="dialog" style="display: none;">
+			<div class="mask"></div>
+			<div class="dialog-block">
+				<div class="dialog-content">
+					<p class="ft-black am-ft-18">绑定成功</p>
+					<p class="ft-black am-ft-16" style="margin-top: 15px;">需要下载来牛APP进行体验</p>
+				</div>
+				<div class="am-flex t-line">
+					<div class="flex_01 r-line">
+						<a href="#" class="pop-btn">取消</a>
+					</div>
+					<div class="flex_01">
+						<a href="#" class="pop-btn" style="font-weight: bold;">去下载</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/js/common/jquery-3.2.1.js" ></script>
+		<script type="text/javascript">
+			$('#btnVcode').on('click', function() {
+				var $this = $(this);
+				if($this.hasClass('code-active')) {
+					return;
+				}
+
+				//在此处获取验证码ajax
+				$this.data('vtime', 90); //也可存在cookie
+				$this.addClass('code-active');
+				setVTime($this);
+			})
+
+			/*获取验证码计时方法*/
+			function setVTime(obj) {
+				var s = obj.data('vtime'); //也可取cookie
+				obj.data('vtime', s - 1); //也可存在cookie
+				obj.html(s + '秒之后重新获取');
+				if(s <= 0) {
+					obj.removeClass('code-active');
+					obj.html('再次获取验证码');
+					return;
+				}
+				setTimeout(function() {
+					setVTime(obj);
+				}, 1000);
+			}
+		</script>
+	</body>
 </html>
-<script>
-    const openId = '${openId}';
-    Utils.log(openId);
-</script>
