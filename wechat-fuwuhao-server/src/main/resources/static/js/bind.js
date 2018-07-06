@@ -1,5 +1,5 @@
 //接口路径
-const apiUrl = "http://127.0.0.1:8080/";
+const apiUrl = "http://e524107b.ngrok.io/";
 
 //倒计时的剩余时间，用于存入cookie的键
 const COOKIE_TIME = "remainSecond";
