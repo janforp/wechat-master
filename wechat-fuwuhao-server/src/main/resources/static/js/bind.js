@@ -11,20 +11,47 @@ $('#btnVcode').on('click', function() {
     }else {
         //调用发送验证码接口
         const phoneNumber = $("#phoneNumber").val();
-        if (phoneNumber) {
+        if (isMobile(phoneNumber)) {
             $.ajax({
                 type: "GET",
                 url: apiUrl + 'wx/common?functionId=fetchAuthCode&phoneNumber=' + phoneNumber,
                 dataType: 'json',
                 data: {},
                 success: function(data){
-                    console.log('***success', data);
-                    //在此处获取验证码ajax
-                    $this.addClass('code-active');
-                    setVTime(30);
+                    if (typeof(data) === 'string') {
+                        data = JSON.parse(data);
+                    }
+                    //0:发送成功，1：失败
+                    const code = data.code;
+                    if (code === 0 || code === '0') {
+                        //在此处获取验证码ajax
+                        $this.addClass('code-active');
+                        setVTime(30);
+                    }else {
+                        const error = $("#errorTips");
+                        error.text("获取验证码失败");
+                        error.show();
+                        setTimeout(
+                            function () {
+                                const error = $("#errorTips");
+                                error.text("");
+                                error.hide();
+                            },1000
+                        )
+                    }
                 },
                 error: function(data){
                     console.log('***error', data);
+                    const error = $("#errorTips");
+                    error.text("获取验证码失败");
+                    error.show();
+                    setTimeout(
+                        function () {
+                            const error = $("#errorTips");
+                            error.text("");
+                            error.hide();
+                        },1000
+                    )
                 }
             })
         }else {
@@ -55,6 +82,28 @@ function setVTime(second) {
     }, 1000);
 }
 
+/**
+ * 隐藏提示
+ */
+function hideAlert() {
+    const error = $("#errorTips");
+    error.text("");
+    error.hide();
+}
+
+/**
+ * 是否手机
+ * @param mobile
+ * @returns {boolean}
+ */
+function isMobile(mobile) {
+   if (mobile && mobile.length === 11 && !isNaN(mobile)) {
+       return true;
+   }else {
+       console.log("*** !isNaN(mobile) = " + !isNaN(mobile));
+       return false;
+   }
+}
 /**
  * 页面加载完毕之后
  * 1.先去cookie中获取倒计时的时间，及剩余时间，判断上次的时间是否还没有过
