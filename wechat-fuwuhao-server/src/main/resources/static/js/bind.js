@@ -28,40 +28,35 @@ $('#btnVcode').on('click', function() {
                         $this.addClass('code-active');
                         setVTime(30);
                     }else {
-                        const error = $("#errorTips");
-                        error.text("获取验证码失败");
-                        error.show();
-                        setTimeout(
-                            function () {
-                                const error = $("#errorTips");
-                                error.text("");
-                                error.hide();
-                            },1000
-                        )
+                        showAlert('获取验证码失败',2000);
                     }
                 },
-                error: function(data){
-                    console.log('***error', data);
-                    const error = $("#errorTips");
-                    error.text("获取验证码失败");
-                    error.show();
-                    setTimeout(
-                        function () {
-                            const error = $("#errorTips");
-                            error.text("");
-                            error.hide();
-                        },1000
-                    )
-                }
+                error: function(data){}
             })
         }else {
             //提示输入正确的手机号码
-            const error = $("#errorTips");
-            error.text("*请输入正确的手机号码");
-            error.show();
+            showAlert('请输入正确的手机号码',2000);
         }
     }
 });
+
+/**
+ * 显示提示
+ * @param msg
+ * @param second
+ */
+function showAlert(msg, second) {
+    const error = $("#errorTips");
+    error.text(msg);
+    error.show();
+    setTimeout(
+        function () {
+            const error = $("#errorTips");
+            error.text("");
+            error.hide();
+        },second
+    )
+}
 
 /**
  * 倒计时
@@ -104,6 +99,42 @@ function isMobile(mobile) {
        return false;
    }
 }
+
+/**
+ * 点击绑定按钮
+ * /wx/bind?phoneNumber=13738053603&authCode=1363
+ */
+function bindWeChat() {
+    const phoneNumber = $("#phoneNumber").val();
+    if (!isMobile(phoneNumber)) {
+        showAlert('请填写正确的手机',2000);
+        return;
+    }
+    const authCode = $("#authCode").val();
+    if (!authCode) {
+       showAlert('请输入验证码',2000);
+       return;
+    }
+    $.ajax({
+        type: "GET",
+        url: apiUrl + 'wx/bind?phoneNumber=' + phoneNumber +'&authCode=' + authCode,
+        dataType: 'json',
+        data: {},
+        success: function(data){
+            if (typeof(data) === 'string') {
+                data = JSON.parse(data);
+            }
+            const code = data.code;
+            const msg = data.msg;
+            //0:成功重定向，1：验证码错误/失效，-1：手机号或者验证码空，
+            if (code === 1 || code === '1' || code === -1 || code === -1 || code === 3 || code === '3') {
+                showAlert(msg,2000);
+            }
+        },
+        error: function(data){}
+    })
+}
+
 /**
  * 页面加载完毕之后
  * 1.先去cookie中获取倒计时的时间，及剩余时间，判断上次的时间是否还没有过
