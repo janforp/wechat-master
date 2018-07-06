@@ -78,4 +78,14 @@ public class PageController {
     public String bindPage() {
         return "bind";
     }
+
+    @GetMapping("/bindSuccess")
+    public String bindSuccess() {
+        return "bindSuccess";
+    }
+
+    @GetMapping("/bindSuccessToApp")
+    public String bindSuccessToApp() {
+        return "bindSuccessToApp";
+    }
 }
